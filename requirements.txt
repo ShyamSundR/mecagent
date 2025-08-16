@@ -1,0 +1,34 @@
+# Core ML libraries
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Transformers and models
+transformers>=4.35.0
+datasets>=3.6.0
+timm>=0.9.0
+peft>=0.7.0
+accelerate>=0.24.0
+
+# Computer vision
+opencv-python>=4.8.0
+Pillow>=10.0.0
+
+# 3D/CAD processing
+cadquery>=2.5.2
+trimesh>=4.6.11
+
+# Utilities
+numpy>=1.24.0
+scipy>=1.15.3
+scikit-learn>=1.3.0
+lark>=1.1.0
+pyyaml>=6.0.0
+tyro>=0.5.0
+rich>=13.0.0
+tqdm>=4.65.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Jupyter support
+ipykernel>=6.29.5
