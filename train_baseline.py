@@ -21,7 +21,9 @@ from tqdm import tqdm
 import json
 
 # Add src to path for imports
-sys.path.append('src')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+src_path = os.path.join(current_dir, 'src')
+sys.path.insert(0, src_path)
 
 from data import CadQueryDataset, create_dataloader
 from models.baseline import create_baseline_model
