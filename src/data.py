@@ -215,7 +215,7 @@ class CadQueryDataset:
         
         # Process code - try different possible keys
         code = None
-        for key in ['code', 'text', 'cadquery_code', 'script']:
+        for key in ['cadquery', 'code', 'text', 'cadquery_code', 'script']:
             if key in sample:
                 code = sample[key]
                 break
@@ -246,7 +246,7 @@ class CadQueryDataset:
                 break
         
         code = None
-        for key in ['code', 'text', 'cadquery_code', 'script']:
+        for key in ['cadquery', 'code', 'text', 'cadquery_code', 'script']:
             if key in sample:
                 code = sample[key]
                 break
