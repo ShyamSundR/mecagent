@@ -2,7 +2,7 @@
 
 A comprehensive ML pipeline for generating CadQuery code from images using vision-language models with enhanced features.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Environment Setup
 
@@ -46,7 +46,7 @@ make eval-enhanced
 make compare
 ```
 
-## 📊 Results
+## Results
 
 | Model | VSR ↑ | Best IOU ↑ | Executable % ↑ | Notes |
 |-------|------:|-----------:|----------------:|-------|
@@ -57,7 +57,7 @@ make compare
 
 *Results from 30K training samples, 1K test samples*
 
-## 🏗️ Architecture
+## Architecture
 
 ### Baseline Model
 - **Vision Encoder**: ViT-B/16 (frozen backbone, last 2 blocks fine-tuned)
@@ -69,7 +69,7 @@ make compare
 - **Execution-Guided Sampling**: Best-of-N with execution validation
 - **Heuristic Reranking**: Code quality scoring and selection
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 mecagent-technical-test/
@@ -96,7 +96,7 @@ mecagent-technical-test/
 └── Makefile                # Convenient commands
 ```
 
-## 🔧 Usage
+## Usage
 
 ### Training
 
@@ -138,7 +138,7 @@ python -m src.eval \
     --output results/evaluation.json
 ```
 
-## 🎯 Key Features
+## Key Features
 
 ### 1. Grammar-Aware Decoding
 - EBNF grammar for CadQuery syntax validation
@@ -163,7 +163,7 @@ python -m src.eval \
 - Gradient accumulation for large effective batch sizes
 - Frozen vision encoder with selective unfreezing
 
-## 📈 Ablations
+## Ablations
 
 | Configuration | VSR | Best IOU | Training Time | Notes |
 |---------------|-----|----------|---------------|-------|
@@ -172,7 +172,7 @@ python -m src.eval \
 | +Exec Guidance | 0.93 | 0.67 | 3h | +1% VSR, +3% IOU |
 | +Reranking | 0.94 | 0.69 | 3.5h | +1% VSR, +2% IOU |
 
-## 🚧 Limitations & Bottlenecks
+## Limitations & Bottlenecks
 
 ### Current Limitations
 1. **Dataset Size**: Limited to 30K samples for quick iteration
@@ -187,7 +187,7 @@ python -m src.eval \
 3. **Memory Usage**: Large vision encoder requires careful management
 4. **Grammar Parsing**: Earley parser can be slow for complex code
 
-## 🔮 Future Enhancements (More Time)
+## Future Enhancements (More Time)
 
 ### 1. AST-Aware Architecture
 ```python
@@ -228,7 +228,7 @@ def dpo_loss(valid_codes, invalid_codes):
 - Larger vision encoder (ViT-L/14)
 - CodeT5-base or larger decoder
 
-## 🛠️ Development
+## Development
 
 ### Setup Development Environment
 ```bash
@@ -250,7 +250,7 @@ make model-info
 make clean
 ```
 
-## 📊 Performance on Different Hardware
+## Performance on Different Hardware
 
 | Hardware | Batch Size | Training Time | Memory Usage | Notes |
 |----------|------------|---------------|--------------|-------|
@@ -259,7 +259,7 @@ make clean
 | V100 (32GB) | 32 | 1.5h | 24GB | Full precision possible |
 | CPU | 2 | 24h+ | 8GB | Not recommended |
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -267,11 +267,11 @@ make clean
 4. Add tests
 5. Submit a pull request
 
-## 📄 License
+## License
 
 This project is for technical evaluation purposes.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - HuggingFace for transformers and datasets
 - CadQuery community for the CAD library

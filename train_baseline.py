@@ -315,6 +315,6 @@ if __name__ == "__main__":
             max_code_length=512
         )
         test_model_generation(model, test_dataset, torch.device("cuda" if torch.cuda.is_available() else "cpu"))
-        print("✅ Baseline model training completed successfully!")
+        print("Baseline model training completed successfully!")
     else:
-        print("❌ Training failed!")
+        print("Training failed!")

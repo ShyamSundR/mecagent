@@ -22,7 +22,7 @@ from metrics.valid_syntax_rate import evaluate_syntax_rate_simple
 
 def evaluate_models():
     """Evaluate both baseline and enhanced models."""
-    print("🔍 Evaluating Models...")
+    print("Evaluating Models...")
     print("=" * 50)
     
     # Load test dataset
@@ -50,7 +50,7 @@ def evaluate_models():
         baseline_checkpoint = torch.load('checkpoints/baseline/checkpoint_epoch_3.pt', map_location=device)
         baseline_model.load_state_dict(baseline_checkpoint['model_state_dict'])
         baseline_model.to(device).eval()
-        print("✅ Baseline model loaded successfully")
+        print("Baseline model loaded successfully")
         
         # Load enhanced model
         enhanced_model = create_enhanced_model(
@@ -62,7 +62,7 @@ def evaluate_models():
         enhanced_checkpoint = torch.load('checkpoints/enhanced/enhanced_checkpoint_epoch_3.pt', map_location=device)
         enhanced_model.load_state_dict(enhanced_checkpoint['model_state_dict'])
         enhanced_model.to(device).eval()
-        print("✅ Enhanced model loaded successfully")
+        print("Enhanced model loaded successfully")
         
     except Exception as e:
         print(f"Error loading models: {e}")
@@ -119,7 +119,7 @@ def evaluate_models():
     
     # Evaluate syntax rates
     print("\n" + "=" * 50)
-    print("📊 EVALUATION RESULTS")
+    print("EVALUATION RESULTS")
     print("=" * 50)
     
     try:
@@ -163,4 +163,4 @@ def evaluate_models():
 
 if __name__ == "__main__":
     results = evaluate_models()
-    print("\n✅ Evaluation completed successfully!")
+    print("\nEvaluation completed successfully!")
