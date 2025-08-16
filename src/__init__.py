@@ -10,8 +10,8 @@ from .data import CadQueryDataset, CadQueryTokenizer, ImageProcessor, CadQueryCo
 from .models.baseline import CadQueryBaselineModel, create_baseline_model
 from .models.enhanced import CadQueryEnhancedModel, create_enhanced_model
 # Import utils functions directly from the utils.py file
-import utils
-from utils import setup_logging, set_seed, save_checkpoint, load_checkpoint, safe_execute
+from . import utils
+from .utils import setup_logging, set_seed, save_checkpoint, load_checkpoint, safe_execute
 
 __all__ = [
     'data',

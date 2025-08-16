@@ -16,10 +16,10 @@ import logging
 from PIL import Image
 import numpy as np
 
-from data import CadQueryDataset, ImageProcessor
-from models.baseline import create_baseline_model
-from models.enhanced import create_enhanced_model
-from utils import setup_logging, set_seed, load_checkpoint
+from .data import CadQueryDataset, ImageProcessor
+from .models.baseline import create_baseline_model
+from .models.enhanced import create_enhanced_model
+from .utils import setup_logging, set_seed, load_checkpoint
 
 
 def parse_args():

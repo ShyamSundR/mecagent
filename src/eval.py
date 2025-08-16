@@ -15,7 +15,7 @@ import logging
 
 from metrics.valid_syntax_rate import evaluate_syntax_rate_simple
 from metrics.best_iou import get_iou_best
-from utils import setup_logging, set_seed, save_results
+from .utils import setup_logging, set_seed, save_results
 
 
 def parse_args():

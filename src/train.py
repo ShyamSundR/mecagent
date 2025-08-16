@@ -18,10 +18,10 @@ import time
 from tqdm import tqdm
 import json
 
-from data import CadQueryDataset, create_dataloader
-from models.baseline import create_baseline_model
-from models.enhanced import create_enhanced_model
-from utils import setup_logging, set_seed, save_checkpoint, load_checkpoint
+from .data import CadQueryDataset, create_dataloader
+from .models.baseline import create_baseline_model
+from .models.enhanced import create_enhanced_model
+from .utils import setup_logging, set_seed, save_checkpoint, load_checkpoint
 
 
 def parse_args():
