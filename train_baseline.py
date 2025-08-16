@@ -66,6 +66,21 @@ def train_baseline_model(args):
         max_code_length=512
     )
     
+    # Debug: Check dataset structure
+    print("Checking dataset structure...")
+    try:
+        sample = dataset.get_sample(0)
+        print(f"Sample keys: {list(sample.keys())}")
+        print(f"Image type: {type(sample['image'])}")
+        print(f"Code type: {type(sample['code'])}")
+        print(f"Code length: {len(sample['code']) if sample['code'] else 'None'}")
+    except Exception as e:
+        print(f"Error checking dataset: {e}")
+        # Try to get raw dataset info
+        raw_sample = dataset.dataset[0]
+        print(f"Raw dataset keys: {list(raw_sample.keys())}")
+        return None
+    
     dataloader = create_dataloader(
         dataset,
         batch_size=args.batch_size,

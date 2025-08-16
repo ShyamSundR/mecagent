@@ -201,12 +201,28 @@ class CadQueryDataset:
         """Get a single sample."""
         sample = self.dataset[idx]
         
-        # Process image
-        image = sample['image']
+        # Process image - try different possible keys
+        image = None
+        for key in ['image', 'img', 'picture']:
+            if key in sample:
+                image = sample[key]
+                break
+        
+        if image is None:
+            raise KeyError(f"No image found in sample. Available keys: {list(sample.keys())}")
+        
         image_tensor = self.image_processor.process_image(image)
         
-        # Process code
-        code = sample['code']
+        # Process code - try different possible keys
+        code = None
+        for key in ['code', 'text', 'cadquery_code', 'script']:
+            if key in sample:
+                code = sample[key]
+                break
+        
+        if code is None:
+            raise KeyError(f"No code found in sample. Available keys: {list(sample.keys())}")
+        
         normalized_code = self.code_normalizer.normalize_code(code)
         code_tokens = self.tokenizer.tokenize_code(normalized_code)
         
@@ -221,10 +237,24 @@ class CadQueryDataset:
     def get_sample(self, idx: int) -> Dict:
         """Get a sample without tensor conversion for inspection."""
         sample = self.dataset[idx]
+        
+        # Find image and code keys
+        image = None
+        for key in ['image', 'img', 'picture']:
+            if key in sample:
+                image = sample[key]
+                break
+        
+        code = None
+        for key in ['code', 'text', 'cadquery_code', 'script']:
+            if key in sample:
+                code = sample[key]
+                break
+        
         return {
-            'image': sample['image'],
-            'code': sample['code'],
-            'normalized_code': self.code_normalizer.normalize_code(sample['code'])
+            'image': image,
+            'code': code,
+            'normalized_code': self.code_normalizer.normalize_code(code) if code else None
         }
 
 
