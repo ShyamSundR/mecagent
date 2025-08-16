@@ -15,9 +15,7 @@ from PIL import Image
 import cv2
 from datasets import Dataset, load_dataset
 from transformers import AutoTokenizer, PreTrainedTokenizer
-import timm
-from timm.data import resolve_data_config
-from timm.data.transforms_factory import create_transform
+# timm imports removed - using torchvision transforms instead
 
 
 class CadQueryCodeNormalizer:
@@ -108,13 +106,14 @@ class ImageProcessor:
         self.model_name = model_name
         self.image_size = image_size
         
-        # Get timm model config for transforms
-        config = resolve_data_config({}, model=model_name)
-        self.transform = create_transform(
-            **config,
-            is_training=False,
-            img_size=image_size
-        )
+        # Use simple transforms instead of timm's complex config
+        from torchvision import transforms
+        
+        self.transform = transforms.Compose([
+            transforms.Resize((image_size, image_size)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        ])
     
     def process_image(self, image: Union[str, Path, np.ndarray, Image.Image]) -> torch.Tensor:
         """Process image to tensor format for the model."""
