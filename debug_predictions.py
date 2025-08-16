@@ -13,9 +13,9 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 src_path = os.path.join(current_dir, 'src')
 sys.path.insert(0, src_path)
 
-from src.data import CadQueryDataset
-from src.models.baseline import create_baseline_model
-from src.models.enhanced import create_enhanced_model
+from data import CadQueryDataset
+from models.baseline import create_baseline_model
+from models.enhanced import create_enhanced_model
 
 
 def debug_predictions():
