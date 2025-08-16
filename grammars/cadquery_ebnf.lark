@@ -1,0 +1,108 @@
+// CadQuery EBNF Grammar for Code Validation
+// Covers common CadQuery operations and method chaining patterns
+
+start: statement*
+
+statement: assignment | expression | comment | empty_line
+
+assignment: NAME "=" expression
+expression: workplane_chain | method_call | literal | function_call
+
+workplane_chain: workplane method_call*
+workplane: "cq.Workplane" "(" STRING ")" | "cq.Workplane" "(" workplane_plane ")"
+
+workplane_plane: "XY" | "XZ" | "YZ" | "front" | "back" | "left" | "right" | "top" | "bottom"
+
+method_call: "." NAME "(" arguments? ")"
+arguments: argument ("," argument)*
+argument: literal | NAME | expression | keyword_argument
+
+keyword_argument: NAME "=" (literal | NAME)
+
+// Basic CadQuery operations
+basic_operations: box | cylinder | sphere | cone | wedge | torus
+box: ".box" "(" box_args ")"
+box_args: NUMBER "," NUMBER "," NUMBER
+cylinder: ".cylinder" "(" cylinder_args ")"
+cylinder_args: NUMBER "," NUMBER
+sphere: ".sphere" "(" NUMBER ")"
+cone: ".cone" "(" NUMBER "," NUMBER "," NUMBER ")"
+wedge: ".wedge" "(" wedge_args ")"
+wedge_args: NUMBER "," NUMBER "," NUMBER "," NUMBER "," NUMBER "," NUMBER
+torus: ".torus" "(" NUMBER "," NUMBER ")"
+
+// Face and edge operations
+face_operations: faces | edges | vertices
+faces: ".faces" "(" face_selector? ")"
+face_selector: STRING | ">Z" | "<Z" | ">X" | "<X" | ">Y" | "<Y"
+edges: ".edges" "(" edge_selector? ")"
+edge_selector: STRING | "|Z" | "|X" | "|Y"
+vertices: ".vertices" "(" ")"
+
+// Workplane operations
+workplane_ops: workplane_new | workplane_offset
+workplane_new: ".workplane" "(" ")"
+workplane_offset: ".workplane" "(" "offset=" NUMBER ")"
+
+// Hole operations
+hole_operations: hole | cboreHole | countersinkHole
+hole: ".hole" "(" hole_args ")"
+hole_args: NUMBER ("," NUMBER)?
+cboreHole: ".cboreHole" "(" NUMBER "," NUMBER "," NUMBER ")"
+countersinkHole: ".countersinkHole" "(" NUMBER "," NUMBER "," NUMBER ")"
+
+// Sketch operations
+sketch_operations: rect | circle | polygon | line | arc
+rect: ".rect" "(" rect_args ")"
+rect_args: NUMBER "," NUMBER ("," "forConstruction=" BOOLEAN)?
+circle: ".circle" "(" NUMBER ")"
+polygon: ".polygon" "(" NUMBER "," NUMBER ")"
+line: ".line" "(" NUMBER "," NUMBER ")"
+arc: ".arc" "(" NUMBER "," NUMBER "," NUMBER ")"
+
+// Boolean operations
+boolean_ops: cut | union | intersect
+cut: ".cut" "(" object_ref ")"
+union: ".union" "(" object_ref ")"
+intersect: ".intersect" "(" object_ref ")"
+object_ref: NAME
+
+// Transform operations
+transform_ops: translate | rotate | scale | mirror
+translate: ".translate" "(" translate_args ")"
+translate_args: "(" NUMBER "," NUMBER "," NUMBER ")"
+rotate: ".rotate" "(" rotate_args ")"
+rotate_args: "(" NUMBER "," NUMBER "," NUMBER ")"
+scale: ".scale" "(" NUMBER ")"
+mirror: ".mirror" "(" mirror_args ")"
+mirror_args: "(" mirror_plane ")"
+mirror_plane: "XY" | "XZ" | "YZ"
+
+// Fillet and chamfer
+fillet_chamfer: fillet | chamfer
+fillet: ".fillet" "(" NUMBER ")"
+chamfer: ".chamfer" "(" NUMBER ")"
+
+// Function calls
+function_call: NAME "(" function_args? ")"
+function_args: function_arg ("," function_arg)*
+function_arg: literal | NAME | expression
+
+// Literals
+literal: NUMBER | STRING | BOOLEAN | "None"
+
+// Comments and whitespace
+comment: /#[^\n]*/
+empty_line: /[\s]*/
+
+// Lexical rules
+STRING: /"[^"]*"/
+NUMBER: /\d+(\.\d+)?/
+BOOLEAN: "True" | "False"
+NAME: /[a-zA-Z_][a-zA-Z0-9_]*/
+
+// Ignore whitespace
+%import common.WS
+%ignore WS
+%ignore comment
+%ignore empty_line

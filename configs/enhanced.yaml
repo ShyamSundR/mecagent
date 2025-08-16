@@ -1,0 +1,54 @@
+# Enhanced model configuration
+# Includes grammar-aware decoding, execution guidance, and heuristic reranking
+
+# Model configuration
+vision_model: "vit_base_patch16_224"
+code_model: "Salesforce/codet5-small"
+image_size: 224
+max_code_length: 512
+
+# LoRA configuration
+use_lora: true
+lora_rank: 16
+lora_alpha: 32
+
+# Vision encoder configuration
+freeze_vision: true
+unfreeze_last_n_blocks: 2
+
+# Training configuration
+batch_size: 8
+epochs: 10
+learning_rate: 5e-5
+weight_decay: 0.01
+gradient_accumulation_steps: 4
+max_grad_norm: 1.0
+warmup_steps: 100
+
+# Data configuration
+max_samples: 30000  # Same as baseline for fair comparison
+num_workers: 4
+
+# Hardware configuration
+mixed_precision: true
+device: "auto"
+
+# Generation configuration
+num_beams: 4
+length_penalty: 1.0
+early_stopping: true
+
+# Enhanced features (enabled)
+use_grammar: true
+use_execution_guidance: true
+use_reranking: true
+best_of_n: 6
+execution_timeout: 5.0
+
+# Sampling parameters for enhanced generation
+temperature: 0.8
+top_p: 0.95
+
+# Output configuration
+save_steps: 1000
+eval_steps: 500
