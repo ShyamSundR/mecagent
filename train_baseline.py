@@ -136,7 +136,7 @@ def train_baseline_model(args):
             # Forward pass
             if args.mixed_precision:
                 with autocast():
-                    outputs = model(images=images, labels=input_ids, attention_mask=attention_mask)
+                    outputs = model(images, input_ids, attention_mask, labels=input_ids)
                     loss = outputs.loss
                 
                 # Backward pass
@@ -144,7 +144,7 @@ def train_baseline_model(args):
                 scaler.step(optimizer)
                 scaler.update()
             else:
-                outputs = model(images=images, labels=input_ids, attention_mask=attention_mask)
+                outputs = model(images, input_ids, attention_mask, labels=input_ids)
                 loss = outputs.loss
                 
                 # Backward pass
